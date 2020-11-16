@@ -3,6 +3,10 @@
  */
 package it.unibo.oop.lab.enum2;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import it.unibo.oop.lab.enum2.Sport;
 import it.unibo.oop.lab.socialnetwork.SocialNetworkUserImpl;
 import it.unibo.oop.lab.socialnetwork.User;
 
@@ -30,6 +34,8 @@ public class Sport2SocialNetworkUserImpl<U extends User> extends SocialNetworkUs
      * 
      * add a field to keep track of the set of sports followed/done by a user
      */
+	
+	private final Set<Sport> sports;
 
     /**
      * Builds a new {@link Sport2SocialNetworkUserImpl}.
@@ -61,6 +67,7 @@ public class Sport2SocialNetworkUserImpl<U extends User> extends SocialNetworkUs
      */
     public Sport2SocialNetworkUserImpl(final String name, final String surname, final String user, final int userAge) {
         super(name, surname, user, userAge);
+        this.sports = new HashSet<>();
     }
 
     /*
@@ -75,7 +82,9 @@ public class Sport2SocialNetworkUserImpl<U extends User> extends SocialNetworkUs
      *            a sport followed/done by the user
      */
     public void addSport(final Sport sport) {
-
+    	if(!likesSport(sport)) {
+    		sports.add(sport);
+    	}
     }
 
     /**
@@ -87,7 +96,7 @@ public class Sport2SocialNetworkUserImpl<U extends User> extends SocialNetworkUs
      * @return true if user likes sport s
      */
     public boolean likesSport(final Sport s) {
-        return false;
+        return sports.contains(s);
     }
 
     /*
@@ -100,8 +109,18 @@ public class Sport2SocialNetworkUserImpl<U extends User> extends SocialNetworkUs
      * 
      * @return the set of individual sport this user practices/follows
      */
+    public final Set<Sport> getIndividualSports() {
+    	Set<Sport> set = new HashSet<>();
+    	for(Sport sport : sports) {
+    		if(sport.isIndividualSport()) {
+    			set.add(sport);
+    		}
+    	}
+    	return set;
+    }
+    
     /*
-     * public Set<Sport> getIndividualSports() { return null; }
+     * 
      * 
      * 
      * /** Returns the set of sports which are practiced in a given place.
@@ -110,8 +129,15 @@ public class Sport2SocialNetworkUserImpl<U extends User> extends SocialNetworkUs
      * included in the resulting set
      * 
      * @return the set of sport practiced in a given place
-     */
-    /*
-     * public Set<Sport> getSportPracticedInPlace(Place p) { return null; }
-     */
+     */ 
+    public final Set<Sport> getSportPracticedInPlace(Place p) { 
+    	Set<Sport> set = new HashSet<>();
+    	for(Sport sport : sports) {
+    		if(sport.getPlace().equals(p)) {
+    			set.add(sport);
+    		}
+    	}
+    	return set;
+    }
+     
 }
