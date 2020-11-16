@@ -53,12 +53,12 @@ public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUse
      * TODO: initialize properly these sports
      */
     static {
-        SOCCER = null;
-        F1 = null;
-        MOTOGP = null;
-        VOLLEY = null;
-        BASKET = null;
-        BIKE = null;
+        SOCCER = new Sport("Soccer");
+        F1 = new Sport("F1");
+        MOTOGP = new Sport("MotoGP");
+        VOLLEY = new Sport("Volley");
+        BASKET = new Sport("Basket");
+        BIKE = new Sport("Bike");
     }
 
     /**
@@ -114,7 +114,9 @@ public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUse
      */
     // TODO
     public void addSport(final Sport sport) {
-
+    	if(!hasSport(sport)){
+    		sports.add(sport);
+    	}
     }
 
     /**
@@ -126,7 +128,7 @@ public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUse
      */
     // TODO
     public boolean hasSport(final Sport s) {
-        return false;
+        return this.sports.contains(s);
     }
 
     /*
@@ -136,6 +138,17 @@ public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUse
      * with its bare name.
      */
     public static final class Sport {
+    	
+    	private String name;
+    	
+    	/**
+    	 * 
+    	 * @param name
+    	 * 				the name of the sport
+    	 */
+    	public Sport(String name) {
+    		this.name = name;
+    	}
         /*
          * TODO
          * 
@@ -144,7 +157,20 @@ public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUse
          */
         @Override
         public boolean equals(final Object o) {
-            return false;
+        	if(o instanceof String) {
+        		String obj = (String)o;
+        		return this.name.equals(obj);
+        	}
+        	return false;
+        }
+        
+        /**
+         * 
+         * @return
+         * 			the hashcode got by the name
+         */
+        public int hashcode() {
+        	return this.name.hashCode();
         }
     }
 }
