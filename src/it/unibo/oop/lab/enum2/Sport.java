@@ -112,7 +112,8 @@ public enum Sport {
 	}
 	
 	public final String toString() {
-		return this.name();
+		return "Sport: " + this.name() + "- Team members: " 
+				+ this.teamMembers + "- Place: " + this.pl;
 	}
 	
 }
