@@ -88,7 +88,7 @@ public final class TestAnonymousComparator {
 			 * 
 			 */
 			public int compare(User o1, User o2) {
-				return o1.getAge() - o2.getAge();
+				return Integer.compare(o1.getAge(), o2.getAge());
 			}
         	
         });
@@ -134,7 +134,7 @@ public final class TestAnonymousComparator {
 			 * 
 			 */
 			public int compare(User o1, User o2) {
-				return  o2.getAge() - o1.getAge();
+				return  Integer.compare(o2.getAge(), o1.getAge());
 			}
         });
         /*
